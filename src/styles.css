@@ -1,0 +1,31 @@
+:root{
+  --bg:#0f1115; --panel:#151922; --text:#e8ecf1; --muted:#9aa3b2; --brand:#6ea8fe; --border:#232838;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{margin:0;background:var(--bg);color:var(--text);font-family:ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji}
+
+header{background:var(--panel);border-bottom:1px solid var(--border)}
+header a{color:var(--text)}
+header input{background:#0d1016;border:1px solid var(--border);color:var(--text);border-radius:8px}
+
+.container{max-width:1200px;margin:0 auto;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px}
+.card{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--panel)}
+
+/* Skeletons */
+.skeleton{background:linear-gradient(90deg,#1b2230 25%,#222a3b 37%,#1b2230 63%);animation:s 1.4s ease infinite;background-size:400% 100%;border-radius:8px}
+.skeleton-img{width:100%;aspect-ratio:3/4}
+.skeleton-line{height:12px;margin:8px}
+.skeleton-line.short{width:60%}
+@keyframes s{0%{background-position:100% 0}100%{background-position:0 0}}
+
+/* Toasts */
+.toast-container{position:fixed;top:16px;right:16px;display:flex;flex-direction:column;gap:8px;z-index:9999}
+.toast{background:#1f2633;color:#dbe4f3;border:1px solid #2a3244;padding:10px 12px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.toast.error{background:#331f28;color:#ffd7e0;border-color:#4a2a36}
+.toast.success{background:#1f3324;color:#d7ffe5;border-color:#2a4431}
+
+.button{background:var(--brand);color:#0b1016;border:none;border-radius:8px;padding:10px 12px;cursor:pointer;font-weight:600}
+.button.ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+.center{display:flex;align-items:center;justify-content:center}
