@@ -82,10 +82,9 @@ function FollowerList({ userId, type }) {
     let mounted = true;
     const load = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/users/${userId}/${type}`);
-        const json = await res.json();
+        const data = type === 'followers' ? await users.followers(userId) : await users.following(userId);
         if (!mounted) return;
-        setItems(json[type] || []);
+        setItems(data[type] || []);
       } catch {}
     };
     if (userId) load();
