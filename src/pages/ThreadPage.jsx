@@ -114,7 +114,6 @@ export default function ThreadPage() {
         </Card>
       )}
       <Typography variant="caption" color="text.secondary" sx={{ mb: 2, display: 'block' }}>{new Date(thread.createdAt).toLocaleString()}</Typography>
-      {/* Thread author */}
       <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2 }}>
         <Avatar component={RouterLink} to={`/users/${thread.user?._id || thread.user}`} sx={{ bgcolor: 'primary.main', width: 40, height: 40 }}>
           {(thread.user?.username || thread.user?.email || 'U').slice(0,1).toUpperCase()}
@@ -204,8 +203,6 @@ export default function ThreadPage() {
           <Button variant="outlined" onClick={()=> dispatch({ type:'SET_STATE', payload:{ page: s.page + 1 } })}>Load more comments</Button>
         </Box>
       )}
-
-      {/* Confirm delete thread */}
       <Dialog open={s.confirmThreadDel} onClose={()=>dispatch({ type:'SET_STATE', payload:{ confirmThreadDel:false } })}>
         <DialogTitle>Delete thread?</DialogTitle>
         <DialogContent>
@@ -217,7 +214,6 @@ export default function ThreadPage() {
         </DialogActions>
       </Dialog>
 
-      {/* Confirm delete comment */}
       <Dialog open={!!s.confirmCommentDel} onClose={()=>dispatch({ type:'SET_STATE', payload:{ confirmCommentDel:null } })}>
         <DialogTitle>Delete comment?</DialogTitle>
         <DialogActions>

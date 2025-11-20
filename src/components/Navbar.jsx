@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext.jsx';
 import { AppBar, Toolbar, Typography, Box, TextField, Button, Stack, Link } from '@mui/material';
+import Logo from './Logo.jsx';
 
 export default function Navbar() {
   const [q, setQ] = useState('');
@@ -15,22 +16,10 @@ export default function Navbar() {
 
   return (
     <AppBar position="sticky" color="transparent" elevation={0} sx={{ borderBottom: '1px solid', borderColor: 'divider', backdropFilter: 'blur(6px)' }}>
-      <Toolbar sx={{ gap: 2 }}>
-        <Typography variant="h6" fontWeight={800} component={RouterLink} to="/" sx={{ textDecoration: 'none', color: 'text.primary' }}>
-          AniViews+
-        </Typography>
-        <Stack direction="row" spacing={2} alignItems="center">
-          <Link component={RouterLink} to="/" underline="hover" color="inherit">Home</Link>
-          <Link component={RouterLink} to="/simulcasts" underline="hover" color="inherit">Simulcasts</Link>
-          <Link component={RouterLink} to="/genres" underline="hover" color="inherit">Genres</Link>
-          <Link component={RouterLink} to="/top" underline="hover" color="inherit">Highest Rated</Link>
-          {user && (
-            <>
-              <Link component={RouterLink} to="/me/lists" underline="hover" color="inherit">My Lists</Link>
-              <Link component={RouterLink} to="/me/recommendations" underline="hover" color="inherit">Recommendations</Link>
-            </>
-          )}
-        </Stack>
+      <Toolbar sx={{ gap: 2, position: 'relative' }}>
+        <Box component={RouterLink} to="/" sx={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', textDecoration: 'none', color: 'inherit' }}>
+          <Logo width={220} />
+        </Box>
         <Box component="form" onSubmit={onSubmit} sx={{ ml: 'auto' }}>
           <TextField size="small" placeholder="Search anime..." value={q} onChange={(e)=>setQ(e.target.value)} sx={{ minWidth: 260 }} />
         </Box>
@@ -40,12 +29,14 @@ export default function Navbar() {
             <Button component={RouterLink} to="/register" variant="contained">Register</Button>
           </Stack>
         ) : (
-          <Stack direction="row" spacing={1} alignItems="center" sx={{ ml: 2 }}>
-            <Typography variant="body2" sx={{ opacity: .8 }}>Hi, {user.username || user.email}</Typography>
-            <Button variant="outlined" color="inherit" onClick={logout}>Logout</Button>
+          <Stack direction="row" spacing={1} alignItems="center" sx={{ position: 'absolute', left: 16 }}>
+            <Typography variant="subtitle2" sx={{ color: 'text.secondary', fontWeight: 600, letterSpacing: '.2px' }}>
+              Hi, {user.username || user.email}
+            </Typography>
           </Stack>
         )}
       </Toolbar>
     </AppBar>
   );
 }
+

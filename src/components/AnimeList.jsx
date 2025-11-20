@@ -47,8 +47,6 @@ export default function AnimeList({ title, fetchPage, cacheKey }) {
   }, [fetchPage, show, title]);
 
   const keyRef = useRef(null);
-
-  // Restore from cache or load when the source (cacheKey/title) changes
   useEffect(() => {
     const key = cacheKey || title;
     keyRef.current = key;
@@ -56,13 +54,10 @@ export default function AnimeList({ title, fetchPage, cacheKey }) {
     if (cached && Array.isArray(cached.items) && cached.items.length > 0) {
       dispatch({ type: 'RESTORE', payload: { items: cached.items, page: cached.page || 1, totalPages: cached.totalPages || 1, loading: false, error: null } });
     } else {
-      // Always start at page 1 for new source or empty cache
       dispatch({ type: 'RESTORE', payload: { items: [], page: 1, totalPages: 1, loading: true, error: null } });
       loadPage(1);
     }
   }, [cacheKey, title]);
-
-  // Persist cache snapshot whenever list/page changes (does not trigger renders)
   useEffect(() => {
     const key = keyRef.current;
     if (!key) return;

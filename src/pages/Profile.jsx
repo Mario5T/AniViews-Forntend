@@ -7,7 +7,7 @@ import { Box, Avatar, Typography, Stack, Card, CardContent } from '@mui/material
 
 export default function Profile() {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { show } = useToast();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -50,10 +50,23 @@ export default function Profile() {
           <Typography variant="h5" fontWeight={800}>{profile.username}</Typography>
           <Typography variant="body2" color="text.secondary">{profile.email}</Typography>
         </Box>
-        <Box sx={{ ml: 'auto' }}>
+        <Box sx={{ ml: 'auto', display: 'flex', alignItems: 'center', gap: 1 }}>
           <Typography variant="body2" sx={{ mr: 2 }}>Followers: {profile.followers?.length || 0} • Following: {profile.following?.length || 0}</Typography>
           {canFollow && (
             <button className="button" onClick={onFollowToggle}>{amFollowing ? 'Unfollow' : 'Follow'}</button>
+          )}
+          {isMe && (
+            <button
+              className="button"
+              style={{
+                backgroundColor: '#d32f2f',
+                color: '#fff',
+                border: '1px solid #d32f2f'
+              }}
+              onClick={logout}
+            >
+              Logout
+            </button>
           )}
         </Box>
       </Stack>
@@ -103,3 +116,4 @@ function FollowerList({ userId, type }) {
     </Stack>
   );
 }
+

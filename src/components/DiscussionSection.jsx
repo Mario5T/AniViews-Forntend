@@ -18,7 +18,6 @@ export default function DiscussionSection({ malId }) {
       const res = await threads.listForAnime(malId);
       setList(res);
     } catch (e) {
-      // noop - could toast
     } finally { setLoading(false); }
   };
 
