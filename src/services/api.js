@@ -1,4 +1,4 @@
-const ORIGIN = "https://aniviews-backend-production-2273.up.railway.app";
+const ORIGIN = "https://aniviews-backend-production.up.railway.app";
 const BASE = ORIGIN + "/api";
 
 function getToken() {
